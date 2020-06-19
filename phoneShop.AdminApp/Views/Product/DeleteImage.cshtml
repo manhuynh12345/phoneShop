@@ -1,0 +1,45 @@
+﻿@model phoneShop.ViewModels.Catalog.Products.ProductImageDeleteRequest
+@{
+    ViewData["Title"] = "DeleteImage";
+}
+
+    <div class="container-fluid">
+        <h1 class="mt-4">Xóa hình ảnh</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a asp-action="ListImage" asp-controller="Product" asp-route-Id="@ViewBag.Id">Danh sách ảnh</a></li>
+            <li class="breadcrumb-item active">Xóa hình ảnh</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">
+                <a class="btn btn-success" asp-action="ListImage" asp-controller="Product" asp-route-Id="@ViewBag.Id">Về danh sách ảnh</a>
+            </div>
+
+            <div class="card-body">
+                <div class="col-md-12">
+                    <dl class="row">
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.Id)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.Id)
+                        </dd>
+                        <dt class="col-sm-2">
+                            @Html.DisplayNameFor(model => model.productId)
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Html.DisplayFor(model => model.productId)
+                        </dd>
+
+                    </dl>
+
+                    <form asp-action="DeleteImage">
+                        <input asp-for="Id" type="hidden" />
+                        <input asp-for="productId" type="hidden" />
+                        <input type="submit" value="Xóa" class="btn btn-danger" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+

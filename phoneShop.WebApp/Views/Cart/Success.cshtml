@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewData["Title"] = "Success";
+    var cate = (List<phoneShop.ViewModels.Catalog.Categories.CategoryViewModel>)ViewBag.CategoryList;
+    var cart = (List<phoneShop.WebApp.Models.CartItems>)ViewBag.Cart;
+}
+
+    <div class="alert alert-success">
+        Bạn vừa mua hàng thành công.
+    </div>
+

@@ -1,0 +1,102 @@
+﻿@model List<phoneShop.WebApp.Models.CartItems>
+@{
+    ViewData["Title"] = "Index";
+
+    var cate = (List<phoneShop.ViewModels.Catalog.Categories.CategoryViewModel>)ViewBag.CategoryList;
+    var cart = (List<phoneShop.WebApp.Models.CartItems>)ViewBag.Cart;
+}
+
+
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="breadcrumb-tree">
+                    <li><a asp-action="Index" asp-controller="Home">Trang chủ</a></li>
+                    <li class="active">Giỏ hàng</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+<div class="content">
+    <div class="section group">
+        @if (Model.Count > 0)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="width:10px; text-align:center; vertical-align:middle;">
+                            Mã sản phẩm
+                        </th>
+                        <th style="width:10px; text-align:center; vertical-align:middle;">
+                            Tên sản phẩm
+                        </th>
+                        <th style="width:10px; text-align:center; vertical-align:middle;">
+                            Hình ảnh sản phẩm
+                        </th>
+                        <th style="width:10px; text-align:center; vertical-align:middle;">
+                            Giá tiền
+                        </th>
+                        <th style="width:10px; text-align:center; vertical-align:middle;">
+                            Số lượng
+                        </th>
+                        <th style="width:10px; text-align:center; vertical-align:middle;">
+                            Thành Tiền
+                        </th>
+                        <th style="width:10px; text-align:center; vertical-align:middle;">
+
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="width:10px; text-align:center; vertical-align:middle;">
+                                @item.Id
+                            </td>
+                            <td style="width:10px; text-align:center; vertical-align:middle;">
+                                @item.Name_Phone
+                            </td>
+                            <td style="width:10px; text-align:center; vertical-align:middle;">
+                                <img src="@ViewBag.Url@item.ImagePath" asp-append-version="true" style="width:100px; height:100px;" />
+                            </td>
+                            <td style="width:10px; text-align:center; vertical-align:middle;">
+                                @item.Price
+                            </td>
+                            <td style="width:10px; text-align:center; vertical-align:middle;">
+                                <input type="number" min="1" max="10" data-id="@item.Id" value="@item.Quantity" />
+                            </td>
+
+                            <td style="width:10px; text-align:center; vertical-align:middle;">
+                                @((item.Price * item.Quantity).ToString("N0"))
+                            </td>
+                            <td style="width:10px; text-align:center; vertical-align:middle;">
+                                <a asp-controller="Cart" asp-action="DeleteCart" asp-route-id="@item.Id " class="btn btn-danger">
+                                    Xoá
+                                </a>
+                            </td>
+                        </tr>
+}
+                </tbody>
+            </table>
+            <div>
+                <a asp-controller="Cart" asp-action="Payment" class="btn btn-success order-submit">
+                    Thanh toán đơn hàng
+                </a>
+            </div>
+        }
+        else
+        {
+            <span class="alert alert-danger text-uppercase">Chưa có sản phẩm nào trong giỏ hàng</span>
+        }
+
+    </div>
+</div>

@@ -1,0 +1,91 @@
+﻿@model IEnumerable<phoneShop.ViewModels.Catalog.Order.OrderViewModel>
+
+@{
+    ViewData["Title"] = "ListOrderDetails";
+}
+
+<div class="container-fluid">
+    <h1 class="mt-4">Danh sách chi tiết đơn hàng</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Order" asp-action="Index">Danh sách đơn hàng</a></li>
+        <li class="breadcrumb-item active">Danh sách hình ảnh</li>
+    </ol>
+    <div class="card mb-12">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <a class="btn btn-success" asp-action="Index" asp-controller="Order">Về danh sách</a>
+                </div>
+                <div class="col-md-6 col-xs-12">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">            
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th style="width:auto; text-align:center; vertical-align:middle;">
+                                Mã đơn hàng
+                            </th>
+                            <th style="width:auto; text-align:center; vertical-align:middle;">
+                                Mã sản phẩm
+                            </th>
+                            <th style="width:auto; text-align:center; vertical-align:middle;">
+                                Tên sản phẩm
+                            </th>
+                            <th style="width:auto; text-align:center; vertical-align:middle;">
+                                Số lượng sản phẩm
+                            </th>
+                            <th style="width:auto; text-align:center; vertical-align:middle;">
+                                Giá tiền
+                            </th>
+                            <th style="width:auto; text-align:center; vertical-align:middle;">
+                                Thành tiền
+                            </th>
+                            <th style="width:200px; text-align:center; vertical-align:middle;">
+                                <a class="btn btn-outline-primary" asp-action="CreateOrderDetail" asp-controller="Order" asp-route-id="@ViewBag.Id">Thêm chi tiết đơn hàng</a>
+                            </th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td style="width:10px; text-align:center; vertical-align:middle;">
+                                @item.Id_order
+                            </td>
+                            <td style="width:10px; text-align:center; vertical-align:middle;">
+                                @item.Id_Product
+                            </td>
+                            <td style="width:10px; text-align:center; vertical-align:middle;">
+                                @item.name_Product
+                            </td>
+                            <td style="width:10px; text-align:center; vertical-align:middle;">
+                                @item.Quantity
+                            </td>
+                            <td style="width:10px; text-align:center; vertical-align:middle;">
+                                @item.Total_Price.ToString("N0")
+                            </td>
+
+                            <td style="width:10px; text-align:center; vertical-align:middle;">
+                                @((item.Total_Price * item.Quantity).ToString("N0"))
+                            </td>
+                        </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 col-md-4 col-lg-4 text-center">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

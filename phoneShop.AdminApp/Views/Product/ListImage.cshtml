@@ -1,0 +1,97 @@
+﻿@model List<phoneShop.ViewModels.Catalog.Products.ProductImageViewModel>
+@{
+    ViewData["Title"] = "ListImage";
+}
+
+@section Scripts{
+    <script>
+        setTimeout(function () {
+            $('#msgAlert').fadeOut('slow');
+        }, 2000);</script>
+}
+<div class="container-fluid">
+    <h1 class="mt-4">Danh sách hình ảnh</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Product" asp-action="Index">Danh sách sản phẩm</a></li>
+        <li class="breadcrumb-item active">Danh sách hình ảnh</li>
+    </ol>
+    <div class="card mb-12">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <a class="btn btn-success" asp-action="Index" asp-controller="Product">Về danh sách</a>
+                </div>
+                <div class="col-md-6 col-xs-12">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="row">
+                @if (ViewBag.SuccessMsg != null)
+                {
+                    <div id="msgAlert" class="alert alert-success" role="alert">
+                        @ViewBag.SuccessMsg
+                    </div>
+                }
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th style="width:auto; text-align:center; vertical-align:middle;">
+                                Id
+                            </th>
+                            <th style="width:auto; text-align:center; vertical-align:middle;">
+                                Hình ảnh sản phẩm
+                            </th>
+                            <th style="width:auto; text-align:center; vertical-align:middle;">
+                                Hình ảnh mặc định
+                            </th>
+                            <th style="width:auto; text-align:center; vertical-align:middle;">
+                                Ngày tạo hình ảnh
+                            </th>
+                            <th style="width:200px; text-align:center; vertical-align:middle;">  
+                                <a class="btn btn-outline-primary" asp-action="CreateImage" asp-controller="Product" asp-route-id="@ViewBag.Id" >Thêm ảnh mới</a>
+                            </th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td style="width:20px; text-align:center; vertical-align:middle;">
+                                    @Html.DisplayFor(modelItem => item.Id)
+                                </td>
+                                <td style="width:200px; text-align:center; vertical-align:middle;">
+                                    <img class=" img-thumbnail " src=" @ViewBag.Url@item.ImagePath" asp-append-version="true" />
+                                </td>
+                                <td style="width:500px; text-align:center; vertical-align:middle;">
+                                    @Html.DisplayFor(modelItem => item.IsDefault)
+                                </td>
+                                <td style="width:120px; text-align:center; vertical-align:middle;">
+                                    @Html.DisplayFor(modelItem => item.DateCreated)
+                                </td>
+                                <td style="width:200px; text-align:center; vertical-align:middle;">
+                                    @Html.ActionLink("Sửa", "UpdateImage", new { id = item.Id, productId = ViewBag.Id }) |
+                                    @Html.ActionLink("Xóa", "DeleteImage", new { id = item.Id, productId = ViewBag.Id })
+                                </td>
+                            </tr>
+                        }
+
+
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 col-md-4 col-lg-4 text-center">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

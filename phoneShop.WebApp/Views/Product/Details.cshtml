@@ -1,0 +1,230 @@
+﻿@model phoneShop.ViewModels.Catalog.Products.ProductViewModel
+@{
+    ViewData["Title"] = "Details";
+    var cate = (List<phoneShop.ViewModels.Catalog.Categories.CategoryViewModel>)ViewBag.CategoryList;
+    var cart = (List<phoneShop.WebApp.Models.CartItems>)ViewBag.Cart;
+
+    var image = (List<phoneShop.ViewModels.Catalog.Products.ProductImageViewModel>)ViewBag.ImageList;
+    var data = (PagedResult<phoneShop.ViewModels.Catalog.Products.ProductViewModel>)ViewBag.data;
+}
+
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="breadcrumb-tree">
+                    <li><a asp-action="Index" asp-controller="Home">TRANG CHỦ</a></li>
+                    <li><a asp-action="Index" asp-controller="Product">Tất cả danh mục</a></li>
+                    @foreach (var item1 in cate)
+                    {
+                        @if (item1.Id == Model.categoryId)
+                        {
+                            <li><a asp-action="Category" asp-controller="Product" asp-route-id="@item1.Id">Danh mục @item1.Name</a></li>
+
+                        }
+
+                    }
+                    <li class="active"> SẢN PHẨM @Model.Name_Phone </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- Product main img -->
+            <div class="col-md-5 col-md-push-2">
+                <div id="product-main-img">
+                    @foreach (var item in image)
+                    {
+                        <div class="product-preview" >
+                            <img src="@ViewBag.Url@item.ImagePath" asp-append-version="true" alt="">
+                        </div>
+                    }
+                </div>
+            </div>
+            <!-- /Product main img -->
+            <!-- Product thumb imgs -->
+            <div class="col-md-2  col-md-pull-5">
+                <div id="product-imgs">
+                    @foreach (var item in image)
+                    {
+                        <div class="product-preview" >
+                            <img src="@ViewBag.Url@item.ImagePath" asp-append-version="true" alt="">
+                        </div>
+                    }
+                </div>
+            </div>
+            <!-- /Product thumb imgs -->
+            <!-- Product details -->
+            <div class="col-md-5">
+                <div class="product-details">
+                    <h2 class="product-name">@Model.Name_Phone</h2>
+                    <div>
+                        <div class="product-rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="product-price">$@Model.Price.ToString("N0") <del class="product-old-price">$@Model.Promotion_Price.ToString("N0") </del></h3>
+                    </div>
+                    <p></p>
+                    <div class="add-to-cart">
+                        <button class="add-to-cart-btn" onclick="location.href='@Url.Action("AddCart", "Cart", new { productId = ViewBag.productId })'">
+                            <i class="fa fa-shopping-cart"></i>
+                            Thêm vào giỏ
+                        </button>
+                    </div>
+
+                    <ul class="product-links">
+                        @foreach (var item1 in cate)
+                        {
+                            @if (item1.Id == Model.categoryId)
+                            {
+                                <li><a asp-action="Category" asp-controller="Product" asp-route-id="@item1.Id">Danh mục @item1.Name</a></li>
+
+                            }
+
+                        }
+                    </ul>
+
+                    <ul class="product-links">
+                        <li>Share:</li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#"><i class="fa fa-envelope"></i></a></li>
+                    </ul>
+
+                </div>
+            </div>
+            <!-- /Product details -->
+            <!-- Product tab -->
+            <div class="col-md-12">
+                <div id="product-tab">
+                    <!-- product tab nav -->
+                    <ul class="tab-nav">
+                        <li class="active"><a data-toggle="tab" href="#tab1">Mô tả sản phẩm</a></li>
+                        <li><a data-toggle="tab" href="#tab2">Chi tiết sản phẩm</a></li>
+                    </ul>
+                    <!-- /product tab nav -->
+                    <!-- product tab content -->
+                    <div class="tab-content">
+                        <!-- tab1  -->
+                        <div id="tab1" class="tab-pane fade in active">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>@Model.Description</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /tab1  -->
+                        <!-- tab2  -->
+                        <div id="tab2" class="tab-pane fade in">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>@Model.Details</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /tab2  -->
+                    </div>
+                    <!-- /product tab content  -->
+                </div>
+            </div>
+            <!-- /product tab -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="section-title text-center">
+                    <h3 class="title">Sản phẩm liên quan </h3>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="products-tabs">
+                        <!-- tab -->
+                        <div id="tab2" class="tab-pane fade in active">
+                            <div class="products-slick" data-nav="#slick-nav-2">
+                                <!-- product -->
+                                @foreach (var item in data.Items)
+                                {
+                                    <div class="product">
+                                        <div class="product-img">
+                                            <img src="@ViewBag.Url@item.ImagePath" asp-append-version="true" style="width:263px; height:263px;" alt="">
+                                        </div>
+                                        <div class="product-body">
+                                            @foreach (var item1 in cate)
+                                            {
+                                                @if (item1.Id == item.categoryId)
+                                                {
+                                                    <p class="product-category">@item1.Name</p>
+                                                }
+
+                                            }
+                                            <h3 class="product-name"><a href="#">@item.Name_Phone</a></h3>
+                                            <h4 class="product-price">$@item.Price.ToString("N0") <del class="product-old-price">@item.Promotion_Price.ToString("N0")</del></h4>
+                                            <div class="product-rating">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <div class="product-btns">
+                                                <button class="quick-view" onclick="location.href='@Url.Action("Details", "Product", new { id = item.Id })'">
+                                                    <i class="fa fa-eye"></i>
+                                                    <span class="tooltipp">Xem sản phẩm</span>
+                                                </button>
+                                            </div>
+
+                                        </div>
+                                        <div class="add-to-cart">
+                                            <button class="add-to-cart-btn" onclick="location.href='@Url.Action("AddCart", "Cart", new { productId = item.Id })'">
+                                                <i class="fa fa-shopping-cart"></i>
+                                                Thêm vào giỏ
+                                            </button>
+                                        </div>
+                                    </div>
+                                }
+                                <!-- /product -->
+
+                            </div>
+                            <div id="slick-nav-2" class="products-slick-nav"></div>
+                        </div>
+                        <!-- /tab -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /Section -->
