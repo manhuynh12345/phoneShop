@@ -11,9 +11,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "phoneShop.Application", "ph
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "phoneShop.ViewModels", "phoneShop.ViewModels\phoneShop.ViewModels.csproj", "{C28D3796-EBCB-4906-A0A2-2F9676EB14F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "phoneShop.BackEndAPI", "phoneShop.BackEndAPI\phoneShop.BackEndAPI.csproj", "{1AC8DBCD-023D-45CF-A588-9F66B18A77E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "phoneShop.BackEndAPI", "phoneShop.BackEndAPI\phoneShop.BackEndAPI.csproj", "{1AC8DBCD-023D-45CF-A588-9F66B18A77E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "phoneShop.AdminApp", "phoneShop.AdminApp\phoneShop.AdminApp.csproj", "{32A6E7ED-CF15-4E2D-BB85-73D5E4A59C75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "phoneShop.AdminApp", "phoneShop.AdminApp\phoneShop.AdminApp.csproj", "{32A6E7ED-CF15-4E2D-BB85-73D5E4A59C75}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{21BE4EAB-C431-4769-A8DF-89DDF0500407}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
